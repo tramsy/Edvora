@@ -95,6 +95,15 @@ Records component CSS
   justify-content: space-around;
   align-items: center;
   width: 50%;
+  min-width: 50%;
+}
+.record__details > *{
+  width: 50%;
+  min-width: 50%;
+}
+.record__img{
+  display: flex;
+  justify-content: center;
 }
 .record__info p {
   margin: 0 0;

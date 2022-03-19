@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./Header";
+import NearestRides from "./NearestRides";
 import Rides from "./Rides";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState(null);
-  const [nearestRides, setNearestRides] = useState([]);
+  const [allRides, setAllRides] = useState(null);
 
   const fetchRides = async () => {
     try {
@@ -14,22 +15,10 @@ function App() {
 
       const handleSuccess = async () => {
         const ridesRecords = await response.json();
-        ridesRecords.map((item) => {
-          let arr = item?.station_path;
-          arr = arr.sort();
-          if (userInfo?.station_code > arr[0]) {
-            for (let i = 0; i < arr.length; i++) {
-              if (arr[i] === userInfo?.station_code) {
-                setNearestRides(nearestRides.push(arr[i]))
-                break;
-              } else if (arr[i] >= userInfo?.station_code) {
-                setNearestRides(nearestRides.push(arr[i]))
-                break;
-              }
-            }
-          }
-        });
-        console.log(nearestRides);
+        console.log(ridesRecords)
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        setAllRides(ridesRecords);
+        setLoading(false);
       };
 
       switch (response.status) {
@@ -53,7 +42,7 @@ function App() {
       const handleSuccess = async () => {
         const userData = await response.json();
         setUserInfo(userData);
-        console.log(userData?.station_code)
+        console.log(userData);
         fetchRides();
       };
 
@@ -81,7 +70,7 @@ function App() {
   return (
     <>
       <Header user={userInfo} />
-      <Rides />
+      <Rides allRides={allRides} destination_code={userInfo?.station_code}/>
     </>
   );
 }

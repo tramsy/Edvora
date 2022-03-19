@@ -1,92 +1,37 @@
 import map from "./assests/map_pics.png";
 
-const NearestRides = () => {
+const NearestRides = ({ ride }) => {
+  const{id, origin_station_code, station_path, distance, date, map_url, state, city} = ride;
   return (
     <>
       <article className="record">
         <div className="record__details">
           <div className="record__img">
-            <img src={map} alt="#" />
+            <img src={map_url} alt="#" />
           </div>
           <div className="record__info">
             <p>
-              Ride id: <span>002</span>
+              Ride id: <span>{ id }</span>
             </p>
             <p>
-              Origin Station: <span>20</span>
+              Origin Station: <span>{ origin_station_code }</span>
             </p>
             <p>
-              Station Path: <span>[20, 49, 80, 39, 43, 72]</span>
+              Station Path: <span>{ `[${station_path}]` }</span>
             </p>
             <p>
-              Date: <span>05th FEB 2022</span>
+              Date: <span>{ date }</span>
             </p>
             <p>
-              Distance: <span>0</span>
+              Distance: <span>{ distance }</span>
             </p>
           </div>
         </div>
         <div>
-          <span className="geo-info">City Name</span>
-          <span className="geo-info">State Name</span>
+          <span className="geo-info">{ city }</span>
+          <span className="geo-info">{ state }</span>
         </div>
       </article>
-      <article className="record">
-        <div className="record__details">
-          <div className="record__img">
-            <img src={map} alt="#" />
-          </div>
-          <div className="record__info">
-            <p>
-              Ride id: <span>002</span>
-            </p>
-            <p>
-              Origin Station: <span>20</span>
-            </p>
-            <p>
-              Station Path: <span>[20, 49, 80, 39, 43, 72]</span>
-            </p>
-            <p>
-              Date: <span>05th FEB 2022</span>
-            </p>
-            <p>
-              Distance: <span>0</span>
-            </p>
-          </div>
-        </div>
-        <div>
-          <span className="geo-info">City Name</span>
-          <span className="geo-info">State Name</span>
-        </div>
-      </article>
-      <article className="record">
-      <div className="record__details">
-        <div className="record__img">
-          <img src={map} alt="#" />
-        </div>
-        <div className="record__info">
-          <p>
-            Ride id: <span>002</span>
-          </p>
-          <p>
-            Origin Station: <span>20</span>
-          </p>
-          <p>
-            Station Path: <span>[20, 49, 80, 39, 43, 72]</span>
-          </p>
-          <p>
-            Date: <span>05th FEB 2022</span>
-          </p>
-          <p>
-            Distance: <span>0</span>
-          </p>
-        </div>
-      </div>
-      <div>
-        <span className="geo-info">City Name</span>
-        <span className="geo-info">State Name</span>
-      </div>
-    </article>
     </>
   );
 };
