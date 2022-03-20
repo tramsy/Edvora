@@ -21,10 +21,7 @@ const Rides = ({ allRides, destination_code }) => {
       let arr = item?.station_path;
       arr = arr.sort();
       for (let i = 0; i < arr.length; i++) {
-        if (
-          arr[i] === destination_code ||
-          (arr[i] >= destination_code && !arr[i] < destination_code)
-        ) {
+        if (arr[i] === destination_code || (arr[i] >= destination_code && !arr[i] < destination_code)) {
           const val = {
             ...item,
             path: arr[i],
@@ -34,6 +31,7 @@ const Rides = ({ allRides, destination_code }) => {
         }
       }
     });
+    tmp = tmp.filter(item=>item!==undefined);
     tmp = tmp.sort((a, b) => {
       return a.path - b.path;
     });
