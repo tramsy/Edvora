@@ -42,7 +42,7 @@ Rides component CSS
   width: 100%;
   min-height: 83vh;
   margin: 1em auto;
-  padding: .5em 0;
+  padding: 0.5em 0;
   background: #555454;
 }
 .buttons-container {
@@ -65,14 +65,67 @@ Rides component CSS
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 .btn.active {
   color: #fff;
   border-bottom: 1px solid #fff;
 }
 .filters {
+  position: relative;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+}
+.filter-icon {
+  width: 15px;
+  height: 15px;
+  margin: 0 0.5em;
+}
+.filters-container {
+  position: absolute;
+  top: 140%;
+  left: 60%;
+  width: 228px;
+  height: 190px;
+  background: #131313;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.filters-container > *{
+  width: 90%;
+}
+.filter-tag{
+  padding: 0 0;
+  margin: .5em 0;
+  
+  color: #A5A5A5;
+}
+.filters-frm{
+  width: 100%;
+  display: grid;
+  justify-items: center;
+}
+.frm-select{
+  width: 90%;
+  height: 37.5px;
+  background: #232323;  
+  border: none;
+  color: #fff;
+  margin: .5em 0;
+}
+.clear-btn{
+  width: 90%;
+  padding: .5em .5em;
+  border: none;
+  background: cornflowerblue;
+  border-radius: 4px;
 }
 
 /***************************
@@ -97,11 +150,11 @@ Records component CSS
   width: 50%;
   min-width: 50%;
 }
-.record__details > *{
+.record__details > * {
   width: 50%;
   min-width: 50%;
 }
-.record__img{
+.record__img {
   display: flex;
   justify-content: center;
 }
@@ -122,4 +175,12 @@ Records component CSS
   color: #fff;
   border-radius: 16px;
   background: rgba(0, 0, 0, 0.56);
+}
+.error{
+  width: 30%;
+  margin: 5em auto;
+}
+.error p{
+  font-size: 12px;
+  margin: 2em 0;
 }

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./Header";
-import NearestRides from "./NearestRides";
 import Rides from "./Rides";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const [allRides, setAllRides] = useState(null);
+
 
   const fetchRides = async () => {
     try {
@@ -15,21 +16,25 @@ function App() {
 
       const handleSuccess = async () => {
         const ridesRecords = await response.json();
-        console.log(ridesRecords)
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-        setAllRides(ridesRecords);
-        setLoading(false);
+        if(ridesRecords.length > 0){
+          setAllRides(ridesRecords);
+          setLoading(false);
+        }else{
+          setError(true)
+        }
+       
       };
 
       switch (response.status) {
         case 200:
           return handleSuccess();
         default:
-          alert("Someting went wrong....");
+          setError(true)
           setLoading(false);
       }
     } catch (err) {
       setLoading(false);
+      setError(true)
       console.error(`Got this error while fetching rides ${err}`);
     }
   };
@@ -41,20 +46,25 @@ function App() {
 
       const handleSuccess = async () => {
         const userData = await response.json();
-        setUserInfo(userData);
-        console.log(userData);
-        fetchRides();
+        if(userData !==null){
+          setUserInfo(userData);
+          fetchRides();
+        }else{
+          setError(true)
+        }
+        
       };
 
       switch (response.status) {
         case 200:
           return handleSuccess();
         default:
-          alert("Someting went wrong....");
+          setError(true)
           setLoading(false);
       }
     } catch (error) {
       setLoading(false);
+      setError(true)
       console.error(`Got this error while fetching user info ${error}`);
     }
   };
@@ -65,6 +75,14 @@ function App() {
 
   if (loading) {
     return <h3 className="loader">Loading...</h3>;
+  }
+
+  if(error){
+    return  <div className="error">
+      <h3>Sorry, something went wrong</h3>
+      <hr />
+      <p>got an error while fetching the data from api. Refresh the page or check logs for more information</p>
+    </div>
   }
 
   return (
