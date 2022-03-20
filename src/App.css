@@ -98,31 +98,31 @@ Rides component CSS
   align-items: center;
   justify-content: center;
 }
-.filters-container > *{
+.filters-container > * {
   width: 90%;
 }
-.filter-tag{
+.filter-tag {
   padding: 0 0;
-  margin: .5em 0;
-  
-  color: #A5A5A5;
+  margin: 0.5em 0;
+
+  color: #a5a5a5;
 }
-.filters-frm{
+.filters-frm {
   width: 100%;
   display: grid;
   justify-items: center;
 }
-.frm-select{
+.frm-select {
   width: 90%;
   height: 37.5px;
-  background: #232323;  
+  background: #232323;
   border: none;
   color: #fff;
-  margin: .5em 0;
+  margin: 0.5em 0;
 }
-.clear-btn{
+.clear-btn {
   width: 90%;
-  padding: .5em .5em;
+  padding: 0.5em 0.5em;
   border: none;
   background: cornflowerblue;
   border-radius: 4px;
@@ -176,11 +176,11 @@ Records component CSS
   border-radius: 16px;
   background: rgba(0, 0, 0, 0.56);
 }
-.error{
+.error {
   width: 30%;
   margin: 5em auto;
 }
-.error p{
+.error p {
   font-size: 12px;
   margin: 2em 0;
 }

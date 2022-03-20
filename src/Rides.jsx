@@ -10,14 +10,13 @@ const Rides = ({ allRides, destination_code }) => {
   const [allCities, setAllCities] = useState([]);
   const [activeTab, setActiveTab] = useState(0);
   const [filterVisibility, setFilterVisibility] = useState(false);
-  const [serachFilter, setSearchFilter] = useState({state: "", city: ""})
+  const [serachFilter, setSearchFilter] = useState({ state: "", city: "" });
 
-
-  const filterNearest = (ridesLst, flag=false) => {
+  const filterNearest = (ridesLst, flag = false) => {
     let tmp = ridesLst.map((item) => {
-      if(!flag){
-        setAllStates((current)=> [...current, item.state])
-        setAllCities((current)=> [...current, item.city]);
+      if (!flag) {
+        setAllStates((current) => [...current, item.state]);
+        setAllCities((current) => [...current, item.city]);
       }
       let arr = item?.station_path;
       arr = arr.sort();
@@ -71,16 +70,12 @@ const Rides = ({ allRides, destination_code }) => {
           return item;
         }
       });
-      // console.log(tmp);
       setPastRides(tmp);
     }
   };
 
-  
-
   const toggleTab = (eve) => {
     const selectedBtn = eve.target.id;
-    console.log(selectedBtn);
     const btnLst = document.querySelectorAll(".btn");
     btnLst.forEach((btn) => {
       if (btn.id === selectedBtn) {
@@ -98,49 +93,53 @@ const Rides = ({ allRides, destination_code }) => {
     );
   };
 
-
-  const handleChange = (eve) =>{
-    console.log(eve.target.name, eve.target.value);
-    const {name, value} = eve.target;
-    if(name === "state" && value !== "state"){
-      const filteredByState = allRides.filter(item=>item.state===value && item)
+  const handleChange = (eve) => {
+    const { name, value } = eve.target;
+    if (name === "state" && value !== "state") {
+      const filteredByState = allRides.filter(
+        (item) => item.state === value && item
+      );
       filterNearest(filteredByState, true);
       filterByDate(filteredByState, "upcoming");
       filterByDate(filteredByState, "past");
-      setAllCities(filteredByState.map(item=>item.city));
+      setAllCities(filteredByState.map((item) => item.city));
     }
-    if(name === "city" && value !== "city"){
-      if(serachFilter.state !== ""){
-        const filteredByStateAndCity = allRides.filter(item=>item.state===serachFilter.state && item.city === value && item)
+    if (name === "city" && value !== "city") {
+      if (serachFilter.state !== "") {
+        const filteredByStateAndCity = allRides.filter(
+          (item) =>
+            item.state === serachFilter.state && item.city === value && item
+        );
         filterNearest(filteredByStateAndCity);
         filterByDate(filteredByStateAndCity, "upcoming");
         filterByDate(filteredByStateAndCity, "past");
-        setAllCities(filteredByStateAndCity.map(item=>item.city));
-      }else{
-        const filteredByCity = allRides.filter(item=>item.city === value && item)
+        setAllCities(filteredByStateAndCity.map((item) => item.city));
+      } else {
+        const filteredByCity = allRides.filter(
+          (item) => item.city === value && item
+        );
         filterNearest(filteredByCity, true);
         filterByDate(filteredByCity, "upcoming");
         filterByDate(filteredByCity, "past");
       }
     }
-    setSearchFilter((prev)=>{
-      return({...prev, [name] : value})
-    })
-  }
+    setSearchFilter((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
 
-  const clearFilters = ()=>{
+  const clearFilters = () => {
     filterNearest(allRides);
     filterByDate(allRides, "upcoming");
     filterByDate(allRides, "past");
-    setSearchFilter({state: "", city: ""})
-  }
+    setSearchFilter({ state: "", city: "" });
+  };
 
   useEffect(() => {
     filterNearest(allRides);
     filterByDate(allRides, "upcoming");
     filterByDate(allRides, "past");
   }, []);
-
 
   return (
     <main className="main">
@@ -188,23 +187,39 @@ const Rides = ({ allRides, destination_code }) => {
               <p className="filter-tag">Filters</p>
               <hr />
               <div className="filters-frm">
-                <select className="frm-select" name="state" value={serachFilter.state} onChange={handleChange}>
-                <option value="state">state</option>
-                  {
-                    allStates.map((item, index)=>{
-                      return(<option value={item} key={index}>{item}</option>)
-                    })
-                  }
+                <select
+                  className="frm-select"
+                  name="state"
+                  value={serachFilter.state}
+                  onChange={handleChange}
+                >
+                  <option value="state">state</option>
+                  {allStates.map((item, index) => {
+                    return (
+                      <option value={item} key={index}>
+                        {item}
+                      </option>
+                    );
+                  })}
                 </select>
-                <select className="frm-select" name="city" value={serachFilter.city} onChange={handleChange}>
-                <option value="city">city</option>
-                  {
-                    allCities.map((item, index)=>{
-                      return(<option value={item} key={index}>{item}</option>)
-                    })
-                  }
+                <select
+                  className="frm-select"
+                  name="city"
+                  value={serachFilter.city}
+                  onChange={handleChange}
+                >
+                  <option value="city">city</option>
+                  {allCities.map((item, index) => {
+                    return (
+                      <option value={item} key={index}>
+                        {item}
+                      </option>
+                    );
+                  })}
                 </select>
-                <button className="clear-btn" onClick={clearFilters}>Clear Filters</button>
+                <button className="clear-btn" onClick={clearFilters}>
+                  Clear Filters
+                </button>
               </div>
             </div>
           )}
